@@ -79,11 +79,10 @@ public class PokerTableController implements Initializable {
 	@FXML
 	private HBox hboxP4Cards;
 
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		imgViewDealerButtonPos3.setVisible(true);
-		imgViewDealerButtonPos4.setVisible(true);		
+		imgViewDealerButtonPos4.setVisible(true);
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -122,10 +121,10 @@ public class PokerTableController implements Initializable {
 			iPlayerPosition = 0;
 		}
 
-		//	Set the PlayerPosition in the Player
+		// Set the PlayerPosition in the Player
 		mainApp.getPlayer().setiPlayerPosition(iPlayerPosition);
 
-		//	Build an Action message
+		// Build an Action message
 		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());
 
 		// Send the Action to the Hub
@@ -138,27 +137,27 @@ public class PokerTableController implements Initializable {
 
 	public void Handle_TableState(Table HubPokerTable) {
 
-		//TODO: If this message is called, that means there
-		//		was a change to the state of the Table (player
-		//		probably ran 'sit' or 'leave'
-		//		The Table was updated, you just have to refresh the
-		//		UI controls to show the current state of the 
-		//		Table object
-		
-		//TODO: run the 'getHashPlayers' method, iterate 
-		//		for all players and update the player label
-		//		and state of the sit/leave button.
+		// TODO: If this message is called, that means there
+		// was a change to the state of the Table (player
+		// probably ran 'sit' or 'leave'
+		// The Table was updated, you just have to refresh the
+		// UI controls to show the current state of the
+		// Table object
 
-		//		Example: Joe sits at Position 1
-		//		Joe should see the 'Sit' button in position 1 in the
-		//		'pressed in' state, and with 
+		// TODO: run the 'getHashPlayers' method, iterate
+		// for all players and update the player label
+		// and state of the sit/leave button.
+
+		// Example: Joe sits at Position 1
+		// Joe should see the 'Sit' button in position 1 in the
+		// 'pressed in' state, and with
 	}
 
 	@FXML
 	void btnStart_Click(ActionEvent event) {
-		// Start the Game
-		//TODO: Create an instance of Action, Action = StartGame
-		//		Send the message to the hub
+		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
+		mainApp.messageSend(act);
+
 	}
 
 	@FXML
@@ -231,6 +230,5 @@ public class PokerTableController implements Initializable {
 
 		ft.play();
 	}
-
 
 }

@@ -110,15 +110,33 @@ public class RootLayoutController implements Initializable {
 		
 		mnuBet.getItems().add(rmi1);
 		mnuBet.getItems().add(rmi2);
-		
-		//	TODO - Lab #5...  Add a new menu item that will display the betting rules...
-		//	Two choices:
-		//	No Limit (set this as default)
-		//	Pot Limit (this is NOT the default)
-		//	Group them together with a Toggle Group
-		//	Write a method to return which is selected.. .check out getRuleName()
-
 	}
+		
+		public String getBettingRule()
+		{	
+			String bettingRuleName = null;
+			for (Menu m: mb.getMenus())
+			{
+				if (m.getText() == "Betting Rules")
+				{
+					for (MenuItem mi: m.getItems())
+					{
+						if (mi.getClass().equals(RadioMenuItem.class))
+						{
+							RadioMenuItem rmi = (RadioMenuItem)mi;
+							if (rmi.isSelected() == true)
+							{
+								bettingRuleName = rmi.getId();
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			return bettingRuleName;
+		}
+	
     
 	
 	
