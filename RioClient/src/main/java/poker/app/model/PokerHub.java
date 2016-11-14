@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import exceptions.DeckException;
@@ -52,45 +53,67 @@ public class PokerHub extends Hub {
 	protected void messageReceived(int ClientID, Object message) {
 
 		if (message instanceof Action) {
-			
+
 			Action action = (Action) message;
 			switch (action.getAction()) {
 			case StartGame:
-				resetOutput();
-				// ?????
-				sendToAll(HubPokerTable);
+				/**
+				RootLayoutController pokerGame = new RootLayoutController();
+				pokerGame.BuildMenus();
+				String ruleName = pokerGame.getRuleName();
+				
+				HashMap PlayerHashMap = HubGamePlay.getGamePlayers();
+				
+				Random generator = new Random();
+				Object[] values = PlayerHashMap.values().toArray();
+				UUID Dealer = (UUID) values[generator.nextInt(values.length)];
+				Rule GameRule = HubGamePlay.getRule();
+				GamePlay gamePlay = new GamePlay(GameRule, Dealer);
+				
+				for (UUID players : HubGamePlay.getGamePlayers().keySet()) {
+					HubGamePlay.addPlayerToGame(HubGamePlay.getGamePlayer(players));
+				}
+
+				
+				Deck GameDeck = HubGamePlay.getGameDeck();
+				eGame Game = eGame.getGame(1);
+				sendToAll(HubGamePlay);
+
+				
 				break;
-			//TODO: If the Action = StartGame, start the game...
-			//		Create an instance of GamePlay, set all the parameters
+			// TODO: If the Action = StartGame, start the game...
+			// Create an instance of GamePlay, set all the parameters
+			 * 
+			 */
 			case Sit:
 				resetOutput();
 				HubPokerTable.AddPlayerToTable(action.getPlayer());
 				sendToAll(HubPokerTable);
 				break;
-			//FINISHED: If Action = Sit, add the player to the table
-				
+			// FINISHED: If Action = Sit, add the player to the table
+
 			case Leave:
 				resetOutput();
 				HubPokerTable.RemovePlayerFromTable(action.getPlayer());
 				sendToAll(HubPokerTable);
 				break;
-			//FINISHED: If Action = Leave, remove the player from the table
+			// FINISHED: If Action = Leave, remove the player from the table
 			case TableState:
 				resetOutput();
 				sendToAll(HubPokerTable);
 				break;
-			//FINISHED: If Action = Sit or Leave, send the Table
-			//		back to the client
+			// FINISHED: If Action = Sit or Leave, send the Table
+			// back to the client
 			case GameState:
 				sendToAll(HubGamePlay);
 				break;
-			//FINISHED: If Action = GameState, send HubGamePlay 
-			//		back to the client
+			// FINISHED: If Action = GameState, send HubGamePlay
+			// back to the client
 			}
 		}
 
 		System.out.println("Message Received by Hub");
-		
+
 		sendToAll("Sending Message Back to Client");
 	}
 

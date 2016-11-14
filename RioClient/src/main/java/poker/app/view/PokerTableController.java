@@ -25,6 +25,11 @@ import pokerBase.Table;
 import pokerEnums.eAction;
 import pokerEnums.ePlayerPosition;
 
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
 
 public class PokerTableController implements Initializable {
 
@@ -146,30 +151,81 @@ public class PokerTableController implements Initializable {
 		lblPos2Name.setText("");
 		lblPos3Name.setText("");
 		lblPos4Name.setText("");
-		
+
 		btnPos1SitLeave.setVisible(true);
 		btnPos2SitLeave.setVisible(true);
 		btnPos3SitLeave.setVisible(true);
 		btnPos4SitLeave.setVisible(true);
-		
+
 		btnPos1SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
 		btnPos2SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
 		btnPos3SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
 		btnPos4SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
-		
-		btnStartGame.setDisable(HubPokerTable.getHashPlayers().size() > 0 ? false : true);
-		
-		
-		
-		// TODO: run the 'getHashPlayers' method, iterate
-		// for all players and update the player label
-		// and state of the sit/leave button.
 
-		// Example: Joe sits at Position 1
-		// Joe should see the 'Sit' button in position 1 in the
-		// 'pressed in' state, and with
-		
-		
+		btnStartGame.setDisable(HubPokerTable.getHashPlayers().size() > 0 ? false : true);
+		FadeButton(btnStartGame);
+/**
+		Iterator iterat = HubPokerTable.getHashPlayers().entrySet().iterator();
+		while (iterat.hasNext()) {
+			Map.Entry pair = (Map.Entry) iterat.next();
+			Player p = (Player) pair.getValue();
+			switch (p.getiPlayerPosition()) {
+			case 1:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
+					btnPos1SitLeave.setVisible(true);
+					btnPos2SitLeave.setVisible(false);
+					btnPos3SitLeave.setVisible(false);
+					btnPos4SitLeave.setVisible(false);
+				} else {
+					btnPos1SitLeave.setVisible(false);
+				}
+				lblPos1Name.setText(p.getPlayerName().toString());
+				break;
+			case 2:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
+					btnPos1SitLeave.setVisible(false);
+					btnPos2SitLeave.setVisible(true);
+					btnPos3SitLeave.setVisible(false);
+					btnPos4SitLeave.setVisible(false);
+				} else {
+					btnPos2SitLeave.setVisible(false);
+				}
+				lblPos2Name.setText(p.getPlayerName().toString());
+				break;
+			case 3:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
+					btnPos1SitLeave.setVisible(false);
+					btnPos2SitLeave.setVisible(false);
+					btnPos3SitLeave.setVisible(true);
+					btnPos4SitLeave.setVisible(false);
+				} else {
+					btnPos3SitLeave.setVisible(false);
+				}
+				lblPos3Name.setText(p.getPlayerName().toString());
+				break;
+			case 4:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
+					btnPos1SitLeave.setVisible(false);
+					btnPos2SitLeave.setVisible(false);
+					btnPos3SitLeave.setVisible(false);
+					btnPos4SitLeave.setVisible(true);
+				} else {
+					btnPos4SitLeave.setVisible(false);
+				}
+				lblPos4Name.setText(p.getPlayerName().toString());
+				break;
+			}
+		}
+	*/
+
+	// TODO: run the 'getHashPlayers' method, iterate
+	// for all players and update the player label
+	// and state of the sit/leave button.
+
+	// Example: Joe sits at Position 1
+	// Joe should see the 'Sit' button in position 1 in the
+	// 'pressed in' state, and with
+
 	}
 
 	@FXML
