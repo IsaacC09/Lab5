@@ -1,6 +1,7 @@
 package poker.app.view;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
@@ -16,11 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+import javassist.bytecode.Descriptor.Iterator;
 import poker.app.MainApp;
 import pokerBase.Action;
+import pokerBase.Player;
 import pokerBase.Table;
 import pokerEnums.eAction;
 import pokerEnums.ePlayerPosition;
+
 
 public class PokerTableController implements Initializable {
 
@@ -137,13 +141,26 @@ public class PokerTableController implements Initializable {
 
 	public void Handle_TableState(Table HubPokerTable) {
 
-		// TODO: If this message is called, that means there
-		// was a change to the state of the Table (player
-		// probably ran 'sit' or 'leave'
-		// The Table was updated, you just have to refresh the
-		// UI controls to show the current state of the
-		// Table object
-
+		// Pretty sure this is complete
+		lblPos1Name.setText("");
+		lblPos2Name.setText("");
+		lblPos3Name.setText("");
+		lblPos4Name.setText("");
+		
+		btnPos1SitLeave.setVisible(true);
+		btnPos2SitLeave.setVisible(true);
+		btnPos3SitLeave.setVisible(true);
+		btnPos4SitLeave.setVisible(true);
+		
+		btnPos1SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
+		btnPos2SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
+		btnPos3SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
+		btnPos4SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
+		
+		btnStartGame.setDisable(HubPokerTable.getHashPlayers().size() > 0 ? false : true);
+		
+		
+		
 		// TODO: run the 'getHashPlayers' method, iterate
 		// for all players and update the player label
 		// and state of the sit/leave button.
@@ -151,6 +168,8 @@ public class PokerTableController implements Initializable {
 		// Example: Joe sits at Position 1
 		// Joe should see the 'Sit' button in position 1 in the
 		// 'pressed in' state, and with
+		
+		
 	}
 
 	@FXML
