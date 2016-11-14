@@ -28,6 +28,8 @@ import pokerEnums.eDrawCount;
 import pokerEnums.eGame;
 import pokerEnums.eGameState;
 
+//Lab 5 by Isaac Chouri, Kevin Doak, and Victor Forman
+
 public class PokerHub extends Hub {
 
 	private Table HubPokerTable = new Table();
@@ -57,24 +59,26 @@ public class PokerHub extends Hub {
 			Action action = (Action) message;
 			switch (action.getAction()) {
 			case StartGame:
-				/**
+				resetOutput();
+				//Attempt at starting game
 				RootLayoutController pokerGame = new RootLayoutController();
 				pokerGame.BuildMenus();
 				String ruleName = pokerGame.getRuleName();
-				
+				//Setting up players for game
 				HashMap PlayerHashMap = HubGamePlay.getGamePlayers();
-				
+				//Setting up a dealer for the game, Rules and Dealer should be involved with GamePlay
+				//instance but not quite sure how to approach. 
 				Random generator = new Random();
 				Object[] values = PlayerHashMap.values().toArray();
 				UUID Dealer = (UUID) values[generator.nextInt(values.length)];
 				Rule GameRule = HubGamePlay.getRule();
 				GamePlay gamePlay = new GamePlay(GameRule, Dealer);
-				
+				//Assigning players with for loop for HubGamePlay
 				for (UUID players : HubGamePlay.getGamePlayers().keySet()) {
 					HubGamePlay.addPlayerToGame(HubGamePlay.getGamePlayer(players));
 				}
 
-				
+				//Establishing deck in HubGamePlay
 				Deck GameDeck = HubGamePlay.getGameDeck();
 				eGame Game = eGame.getGame(1);
 				sendToAll(HubGamePlay);
@@ -83,8 +87,7 @@ public class PokerHub extends Hub {
 				break;
 			// TODO: If the Action = StartGame, start the game...
 			// Create an instance of GamePlay, set all the parameters
-			 * 
-			 */
+			 
 			case Sit:
 				resetOutput();
 				HubPokerTable.AddPlayerToTable(action.getPlayer());
